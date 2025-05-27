@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Números</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff9c4;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    .numeros {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .numero {
+      width: 80px;
+      height: 80px;
+      background-color: #f39c12;
+      color: white;
+      border-radius: 50%;
+      font-size: 2rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Aprenda os Números</h1>
+  <div class="numeros">
+    <div class="numero" onclick="falar('Um')">1</div>
+    <div class="numero" onclick="falar('Dois')">2</div>
+    <div class="numero" onclick="falar('Três')">3</div>
+    <div class="numero" onclick="falar('Quatro')">4</div>
+    <div class="numero" onclick="falar('Cinco')">5</div>
+    <div class="numero" onclick="falar('Seis')">6</div>
+    <div class="numero" onclick="falar('Sete')">7</div>
+    <div class="numero" onclick="falar('Oito')">8</div>
+    <div class="numero" onclick="falar('Nove')">9</div>
+    <div class="numero" onclick="falar('Dez')">10</div>
+  </div>
+  <script>
+    function falar(texto) {
+      const som = new SpeechSynthesisUtterance(texto);
+      som.lang = "pt-BR";
+      speechSynthesis.speak(som);
+    }
+  </script>
+</body>
+</html>

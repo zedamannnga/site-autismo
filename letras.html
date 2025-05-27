@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Letras</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e0f7fa;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    .letras {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .letra {
+      width: 50px;
+      height: 50px;
+      background-color: #00796b;
+      color: white;
+      border-radius: 10px;
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Aprenda as Letras</h1>
+  <div class="letras">
+    <div class="letra" onclick="falar('A')">A</div>
+    <div class="letra" onclick="falar('B')">B</div>
+    <div class="letra" onclick="falar('C')">C</div>
+    <div class="letra" onclick="falar('D')">D</div>
+    <div class="letra" onclick="falar('E')">E</div>
+    <div class="letra" onclick="falar('F')">F</div>
+    <div class="letra" onclick="falar('G')">G</div>
+    <div class="letra" onclick="falar('H')">H</div>
+    <div class="letra" onclick="falar('I')">I</div>
+    <div class="letra" onclick="falar('J')">J</div>
+  </div>
+  <script>
+    function falar(texto) {
+      const som = new SpeechSynthesisUtterance(texto);
+      som.lang = "pt-BR";
+      speechSynthesis.speak(som);
+    }
+  </script>
+</body>
+</html>

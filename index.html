@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Login - Mundo Colorido</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-box {
+      background-color: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    input {
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      width: 100%;
+    }
+    button {
+      background-color: #ff7675;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover {
+      background-color: #d63031;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h1>Mundo Colorido</h1>
+    <input type="text" placeholder="Nome da criança" id="nome">
+    <button onclick="entrar()">Entrar</button>
+  </div>
+  <script>
+    function entrar() {
+      const nome = document.getElementById('nome').value;
+      if (nome.trim()) {
+        window.location.href = "menu.html";
+      } else {
+        alert("Por favor, digite o nome!");
+      }
+    }
+  </script>
+</body>
+</html>

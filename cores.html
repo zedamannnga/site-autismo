@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Cores</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    .cores-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .cor {
+      width: 120px;
+      height: 120px;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      font-size: 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Aprenda as Cores</h1>
+  <div class="cores-container">
+    <div class="cor" style="background-color: red;" onclick="falar('Vermelho')">Vermelho</div>
+    <div class="cor" style="background-color: blue;" onclick="falar('Azul')">Azul</div>
+    <div class="cor" style="background-color: green;" onclick="falar('Verde')">Verde</div>
+    <div class="cor" style="background-color: yellow; color: black;" onclick="falar('Amarelo')">Amarelo</div>
+    <div class="cor" style="background-color: orange;" onclick="falar('Laranja')">Laranja</div>
+    <div class="cor" style="background-color: purple;" onclick="falar('Roxo')">Roxo</div>
+  </div>
+  <script>
+    function falar(texto) {
+      const som = new SpeechSynthesisUtterance(texto);
+      som.lang = "pt-BR";
+      speechSynthesis.speak(som);
+    }
+  </script>
+</body>
+</html>

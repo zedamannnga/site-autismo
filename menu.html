@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Menu Principal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      text-align: center;
+      padding: 40px;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    .menu {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    .botao {
+      background-color: #ffffff;
+      padding: 20px;
+      border-radius: 15px;
+      text-decoration: none;
+      color: #2c3e50;
+      font-size: 1.2rem;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: background 0.3s;
+    }
+    .botao:hover {
+      background-color: #dfe6e9;
+    }
+  </style>
+</head>
+<body>
+  <h1>Olá! Escolha uma atividade</h1>
+  <div class="menu">
+    <a class="botao" href="cores.html">Cores</a>
+    <a class="botao" href="formas.html">Formas</a>
+    <a class="botao" href="numeros.html">Números</a>
+    <a class="botao" href="letras.html">Letras</a>
+    <a class="botao" href="musicas.html">Músicas</a>
+  </div>
+</body>
+</html>

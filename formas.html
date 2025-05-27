@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Formas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #e3f2fd;
+      text-align: center;
+      padding: 30px;
+    }
+    h1 {
+      margin-bottom: 30px;
+    }
+    .formas-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+    }
+    .forma {
+      width: 120px;
+      height: 120px;
+      border: 2px solid #000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+    .circulo {
+      border-radius: 50%;
+    }
+    .triangulo {
+      width: 0;
+      height: 0;
+      border-left: 60px solid transparent;
+      border-right: 60px solid transparent;
+      border-bottom: 120px solid #000;
+      background: none;
+      text-indent: -9999px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Aprenda as Formas</h1>
+  <div class="formas-container">
+    <div class="forma" onclick="falar('Quadrado')">■</div>
+    <div class="forma circulo" onclick="falar('Círculo')">●</div>
+    <div class="forma" style="width: 160px;" onclick="falar('Retângulo')">Retângulo</div>
+    <div class="triangulo" onclick="falar('Triângulo')">Triângulo</div>
+  </div>
+  <script>
+    function falar(texto) {
+      const som = new SpeechSynthesisUtterance(texto);
+      som.lang = "pt-BR";
+      speechSynthesis.speak(som);
+    }
+  </script>
+</body>
+</html>
