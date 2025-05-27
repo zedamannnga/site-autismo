@@ -2,101 +2,75 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <title>Login - Site Autismo</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Letras Divertidas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      background: #b2ebf2;
+      background: #fff3e0;
       font-family: 'Comic Sans MS', cursive, sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-      margin: 0;
+      text-align: center;
+      padding: 2rem;
     }
     h1 {
-      color: #00796b;
+      color: #ef6c00;
     }
-    form {
-      background: white;
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      width: 320px;
-      text-align: center;
+    .letras {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 15px;
+      margin-top: 30px;
+      justify-items: center;
     }
-    input[type="text"], input[type="password"] {
-      width: 90%;
-      padding: 0.6rem;
-      margin: 0.7rem 0;
-      border: 2px solid #00796b;
-      border-radius: 10px;
-      font-size: 1rem;
-    }
-    button {
-      background: #00796b;
-      color: white;
-      padding: 0.8rem 1.5rem;
-      border: none;
+    .letra {
+      background-color: #ffb300;
       border-radius: 15px;
-      font-size: 1.2rem;
+      padding: 20px 0;
+      width: 80px;
+      font-size: 2rem;
+      color: white;
+      font-weight: bold;
       cursor: pointer;
-      margin-top: 1rem;
-      transition: background-color 0.3s ease;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      user-select: none;
+      transition: transform 0.2s;
     }
-    button:hover {
-      background: #004d40;
+    .letra:hover {
+      transform: scale(1.2);
+      background-color: #ffa000;
     }
-    .message {
-      margin-top: 1rem;
-      font-size: 0.9rem;
-      color: #00796b;
+    .voltar {
+      margin-top: 30px;
+      font-size: 1rem;
+      background-color: #ef6c00;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Bem-vindo!</h1>
-  <form id="formLogin">
-    <input type="text" id="usuario" placeholder="Nome do usuário" required />
-    <input type="password" id="senha" placeholder="Senha" required />
-    <button type="submit">Entrar</button>
-    <div class="message" onclick="alert('Para criar conta, use o mesmo formulário e clique em Entrar!')">
-      Ainda não tem conta? Clique aqui!
-    </div>
-  </form>
+  <h1>Vamos aprender as letras!</h1>
+  <div class="letras">
+    <div class="letra" onclick="falar('A')">A</div>
+    <div class="letra" onclick="falar('B')">B</div>
+    <div class="letra" onclick="falar('C')">C</div>
+    <div class="letra" onclick="falar('D')">D</div>
+    <div class="letra" onclick="falar('E')">E</div>
+    <div class="letra" onclick="falar('F')">F</div>
+    <div class="letra" onclick="falar('G')">G</div>
+    <div class="letra" onclick="falar('H')">H</div>
+    <div class="letra" onclick="falar('I')">I</div>
+  </div>
+  <button class="voltar" onclick="window.location.href='menu.html'">Voltar ao Menu</button>
 
   <script>
-    const form = document.getElementById('formLogin');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      const usuario = document.getElementById('usuario').value.trim();
-      const senha = document.getElementById('senha').value.trim();
-
-      if (!usuario || !senha) {
-        alert('Por favor, preencha todos os campos!');
-        return;
-      }
-
-      // Simples simulação de cadastro/login localStorage
-      let users = JSON.parse(localStorage.getItem('users') || '{}');
-
-      if (!users[usuario]) {
-        users[usuario] = senha;
-        localStorage.setItem('users', JSON.stringify(users));
-        alert('Conta criada com sucesso! Você já está logado.');
-        window.location.href = 'menu.html';
-      } else {
-        if (users[usuario] === senha) {
-          alert('Login realizado com sucesso!');
-          window.location.href = 'menu.html';
-        } else {
-          alert('Senha incorreta! Tente novamente.');
-        }
-      }
-    });
+    function falar(texto) {
+      const voz = new SpeechSynthesisUtterance(texto);
+      voz.lang = "pt-BR";
+      speechSynthesis.speak(voz);
+    }
   </script>
 </body>
 </html>
