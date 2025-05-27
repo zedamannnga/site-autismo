@@ -1,41 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Letras</title>
+  <meta charset="UTF-8" />
+  <title>Letras Divertidas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #e0f7fa;
+      background: #fff3e0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
-      padding: 30px;
+      padding: 2rem;
     }
     h1 {
-      margin-bottom: 30px;
+      color: #ef6c00;
     }
     .letras {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      justify-content: center;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+      gap: 15px;
+      margin-top: 30px;
+      justify-items: center;
     }
     .letra {
-      width: 50px;
-      height: 50px;
-      background-color: #00796b;
+      background-color: #ffb300;
+      border-radius: 15px;
+      padding: 20px 0;
+      width: 80px;
+      font-size: 2rem;
       color: white;
-      border-radius: 10px;
-      font-size: 1.5rem;
       font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      cursor: pointer;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
+      user-select: none;
+      transition: transform 0.2s;
+    }
+    .letra:hover {
+      transform: scale(1.2);
+      background-color: #ffa000;
+    }
+    .voltar {
+      margin-top: 30px;
+      font-size: 1rem;
+      background-color: #ef6c00;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Aprenda as Letras</h1>
+  <h1>Vamos aprender as letras!</h1>
   <div class="letras">
     <div class="letra" onclick="falar('A')">A</div>
     <div class="letra" onclick="falar('B')">B</div>
@@ -46,13 +62,14 @@
     <div class="letra" onclick="falar('G')">G</div>
     <div class="letra" onclick="falar('H')">H</div>
     <div class="letra" onclick="falar('I')">I</div>
-    <div class="letra" onclick="falar('J')">J</div>
   </div>
+  <button class="voltar" onclick="window.location.href='menu.html'">Voltar ao Menu</button>
+
   <script>
     function falar(texto) {
-      const som = new SpeechSynthesisUtterance(texto);
-      som.lang = "pt-BR";
-      speechSynthesis.speak(som);
+      const voz = new SpeechSynthesisUtterance(texto);
+      voz.lang = "pt-BR";
+      speechSynthesis.speak(voz);
     }
   </script>
 </body>
