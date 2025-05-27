@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<title>Jogo: Adivinhe a Cor!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<style>
+  body {
+    background: #ffecb3;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    text-align: center;
+    padding: 2rem;
+  }
+  h1 {
+    color: #f57c00;
+  }
+  .cor-alvo {
+    width: 200px;
+    height: 200px;
+    margin: 20px auto;
+    border-radius: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  }
+  .opcoes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  button {
+    background: #ffb300;
+    border: none;
+    border-radius: 20px;
+    padding: 15px 25px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+    transition: background-color 0.3s;
+  }
+  button:hover {
+    background: #ffa000;
+    color: white;
+  }
+  .resultado {
+    margin-top: 20px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #00796b;
+    min-height: 40px;
+  }
+  .botao-voltar {
+    margin-top: 30px;
+    background-color: #f57c00;
+    color: white;
+    border: none;
+    border-radius: 15px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <h1>Adivinhe a cor!</h1>
+  <div id="corAlvo" class="cor-alvo"></div>
+  <div class="opcoes" id="opcoes"></div>
+  <div class="resultado" id="resultado"></div>
+  <button class="botao-voltar" onclick="window.location.href='menu.html'">Voltar ao Menu</button>
+
+<script>
+  const cores = [
+    {nome: 'Vermelho', codigo: 'red'},
+    {nome: 'Azul', codigo: 'blue'},
+    {nome: 'Verde', codigo: 'green'},
+    {nome: 'Amarelo', codigo: 'gold'},
+    {nome: 'Roxo', codigo: 'purple'},
+    {nome: 'Preto', codigo: 'black'}
+  ];
+
+  let corAtual = null;
+
+  function gerarJogo() {
+    corAtual = cores[Math.floor(Math.random() * cores.length)];
+    document.getElementById('corAlvo').style.backgroundColor = corAtual.codigo;
+    document.getElementById('resultado').textContent = '';
+    
+    // Mistura as opções (inclui a correta e outras 2 aleatórias)
+    let opcoes = [corAtual];
+    while (opcoes.length < 3) {
+      let opcaoAleatoria = cores[Math.floor(Math.random() * cores.length)];
+      if (!opcoes.find(c => c.nome === opcaoAleatoria.nome)) {
+        opcoes.push(opcaoAleatoria);
+      }
+    }
+
+    opcoes = opcoes.sort(() => Math.random() - 0.5); // embaralhar
+
+    const container = document.getElementById('opcoes');
+    container.innerHTML = '';
+    opcoes.forEach(opcao => {
+      const btn = document.createElement('button');
+      btn.textContent = opcao.nome;
+      btn.onclick = () => verificarResposta(opcao.nome);
+      container.appendChild(btn);
+    });
+  }
+
+  function verificarResposta(resposta) {
+    const resultado = document.getElementById('resultado');
+    if (resposta === corAtual.nome) {
+      resultado.textContent = 'Parabéns! Você acertou!';
+      falar('Parabéns! Você acertou!');
+      setTimeout(gerarJogo, 1500);
+    } else {
+      resultado.textContent = 'Ops! Tente novamente.';
+      falar('Ops! Tente novamente.');
+    }
+  }
+
+  function falar(texto) {
+    const voz = new SpeechSynthesisUtterance(texto);
+    voz.lang = "pt-BR";
+    speechSynthesis.speak(voz);
+  }
+
+  gerarJogo();
+</script>
+</body>
+</html>
