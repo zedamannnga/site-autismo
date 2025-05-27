@@ -1,76 +1,77 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Letras Divertidas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <title>Aprendendo as Letras</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      background: #fff3e0;
+      background-color: #e1bee7;
       font-family: 'Comic Sans MS', cursive, sans-serif;
+      margin: 0;
+      padding: 0;
       text-align: center;
-      padding: 2rem;
     }
+
     h1 {
-      color: #ef6c00;
+      background-color: #ba68c8;
+      color: white;
+      padding: 20px;
+      margin: 0;
     }
-    .letras {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
-      gap: 15px;
-      margin-top: 30px;
-      justify-items: center;
+
+    .letras-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+      gap: 20px;
     }
+
     .letra {
-      background-color: #ffb300;
-      border-radius: 15px;
-      padding: 20px 0;
-      width: 80px;
-      font-size: 2rem;
-      color: white;
+      width: 60px;
+      height: 60px;
+      background-color: #f3e5f5;
+      border: 2px solid #ab47bc;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
       font-weight: bold;
+      color: #6a1b9a;
       cursor: pointer;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-      user-select: none;
-      transition: transform 0.2s;
+      transition: transform 0.2s, background-color 0.2s;
     }
+
     .letra:hover {
-      transform: scale(1.2);
-      background-color: #ffa000;
+      background-color: #ce93d8;
+      transform: scale(1.1);
     }
-    .voltar {
-      margin-top: 30px;
-      font-size: 1rem;
-      background-color: #ef6c00;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 10px;
-      cursor: pointer;
+
+    @media (max-width: 500px) {
+      .letra {
+        width: 50px;
+        height: 50px;
+        font-size: 20px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>Vamos aprender as letras!</h1>
-  <div class="letras">
-    <div class="letra" onclick="falar('A')">A</div>
-    <div class="letra" onclick="falar('B')">B</div>
-    <div class="letra" onclick="falar('C')">C</div>
-    <div class="letra" onclick="falar('D')">D</div>
-    <div class="letra" onclick="falar('E')">E</div>
-    <div class="letra" onclick="falar('F')">F</div>
-    <div class="letra" onclick="falar('G')">G</div>
-    <div class="letra" onclick="falar('H')">H</div>
-    <div class="letra" onclick="falar('I')">I</div>
-  </div>
-  <button class="voltar" onclick="window.location.href='menu.html'">Voltar ao Menu</button>
+  <h1>Aprendendo as Letras</h1>
+  <div class="letras-container">
+    <script>
+      const letras = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+      letras.forEach(letra => {
+        document.write(`<div class="letra" onclick="mostrarLetra('${letra}')">${letra}</div>`);
+      });
 
-  <script>
-    function falar(texto) {
-      const voz = new SpeechSynthesisUtterance(texto);
-      voz.lang = "pt-BR";
-      speechSynthesis.speak(voz);
-    }
-  </script>
+      function mostrarLetra(letra) {
+        alert("Essa é a letra: " + letra);
+        // Aqui você pode tocar um som futuramente se quiser
+      }
+    </script>
+  </div>
 </body>
 </html>
