@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cadastro - Site Autismo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      background: #ffe0b2;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .cadastro-box {
+      background: white;
+      padding: 30px 40px;
+      border-radius: 25px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      width: 320px;
+      text-align: center;
+    }
+    h1 {
+      color: #ef6c00;
+      margin-bottom: 20px;
+    }
+    input[type="text"],
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 10px;
+      margin: 10px 0;
+      border-radius: 15px;
+      border: 1px solid #ffcc80;
+      font-size: 1rem;
+    }
+    button {
+      width: 100%;
+      background-color: #ef6c00;
+      border: none;
+      color: white;
+      padding: 15px;
+      font-size: 1.1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+    button:hover {
+      background-color: #e65100;
+    }
+    .link {
+      margin-top: 15px;
+      font-size: 1rem;
+    }
+    .link a {
+      color: #ef6c00;
+      text-decoration: none;
+    }
+    .link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="cadastro-box">
+    <h1>Cadastro</h1>
+    <input type="text" placeholder="Nome" id="nome" />
+    <input type="email" placeholder="Email" id="email" />
+    <input type="password" placeholder="Senha" id="senha" />
+    <button onclick="cadastrar()">Criar Conta</button>
+    <div class="link">
+      <a href="login.html">Já tenho conta</a>
+    </div>
+  </div>
+
+  <script>
+    function cadastrar() {
+      const nome = document.getElementById('nome').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const senha = document.getElementById('senha').value.trim();
+
+      if (!nome || !email || !senha) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+      }
+
+      alert("Conta criada com sucesso!");
+      window.location.href = "menu.html";
+    }
+  </script>
+</body>
+</html>
