@@ -1,53 +1,78 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Cores</title>
+  <meta charset="UTF-8" />
+  <title>Cores Divertidas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
+      background: #e0f7fa;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
-      padding: 30px;
+      padding: 2rem;
     }
     h1 {
-      margin-bottom: 30px;
+      color: #00796b;
     }
-    .cores-container {
-      display: flex;
-      flex-wrap: wrap;
+    .cores {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
       gap: 20px;
-      justify-content: center;
+      margin-top: 30px;
     }
     .cor {
-      width: 120px;
       height: 120px;
-      border-radius: 10px;
-      color: white;
-      font-weight: bold;
-      font-size: 1.2rem;
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
+      color: white;
+      font-size: 1.2rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.1);
+    }
+    .cor:hover {
+      transform: scale(1.1);
+    }
+    .vermelho { background-color: red; }
+    .azul { background-color: blue; }
+    .verde { background-color: green; }
+    .amarelo { background-color: gold; color: black; }
+    .roxo { background-color: purple; }
+    .preto { background-color: black; }
+    .voltar {
+      margin-top: 30px;
+      font-size: 1rem;
+      background-color: #00838f;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
       cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>Aprenda as Cores</h1>
-  <div class="cores-container">
-    <div class="cor" style="background-color: red;" onclick="falar('Vermelho')">Vermelho</div>
-    <div class="cor" style="background-color: blue;" onclick="falar('Azul')">Azul</div>
-    <div class="cor" style="background-color: green;" onclick="falar('Verde')">Verde</div>
-    <div class="cor" style="background-color: yellow; color: black;" onclick="falar('Amarelo')">Amarelo</div>
-    <div class="cor" style="background-color: orange;" onclick="falar('Laranja')">Laranja</div>
-    <div class="cor" style="background-color: purple;" onclick="falar('Roxo')">Roxo</div>
+  <h1>Vamos aprender as cores!</h1>
+  <p>Clique em uma cor para ouvir o nome dela:</p>
+  <div class="cores">
+    <div class="cor vermelho" onclick="falar('Vermelho')">Vermelho</div>
+    <div class="cor azul" onclick="falar('Azul')">Azul</div>
+    <div class="cor verde" onclick="falar('Verde')">Verde</div>
+    <div class="cor amarelo" onclick="falar('Amarelo')">Amarelo</div>
+    <div class="cor roxo" onclick="falar('Roxo')">Roxo</div>
+    <div class="cor preto" onclick="falar('Preto')">Preto</div>
   </div>
+
+  <button class="voltar" onclick="window.location.href='menu.html'">Voltar ao Menu</button>
+
   <script>
     function falar(texto) {
-      const som = new SpeechSynthesisUtterance(texto);
-      som.lang = "pt-BR";
-      speechSynthesis.speak(som);
+      const voz = new SpeechSynthesisUtterance(texto);
+      voz.lang = "pt-BR";
+      speechSynthesis.speak(voz);
     }
   </script>
 </body>
