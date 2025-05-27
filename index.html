@@ -1,11 +1,102 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<title>Redirecionando...</title>
-<meta http-equiv="refresh" content="0; url=login.html" />
+  <meta charset="UTF-8" />
+  <title>Login - Site Autismo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      background: #b2ebf2;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    h1 {
+      color: #00796b;
+    }
+    form {
+      background: white;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      width: 320px;
+      text-align: center;
+    }
+    input[type="text"], input[type="password"] {
+      width: 90%;
+      padding: 0.6rem;
+      margin: 0.7rem 0;
+      border: 2px solid #00796b;
+      border-radius: 10px;
+      font-size: 1rem;
+    }
+    button {
+      background: #00796b;
+      color: white;
+      padding: 0.8rem 1.5rem;
+      border: none;
+      border-radius: 15px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      margin-top: 1rem;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background: #004d40;
+    }
+    .message {
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #00796b;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
-<p>Redirecionando para a página de login...</p>
+  <h1>Bem-vindo!</h1>
+  <form id="formLogin">
+    <input type="text" id="usuario" placeholder="Nome do usuário" required />
+    <input type="password" id="senha" placeholder="Senha" required />
+    <button type="submit">Entrar</button>
+    <div class="message" onclick="alert('Para criar conta, use o mesmo formulário e clique em Entrar!')">
+      Ainda não tem conta? Clique aqui!
+    </div>
+  </form>
+
+  <script>
+    const form = document.getElementById('formLogin');
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      const usuario = document.getElementById('usuario').value.trim();
+      const senha = document.getElementById('senha').value.trim();
+
+      if (!usuario || !senha) {
+        alert('Por favor, preencha todos os campos!');
+        return;
+      }
+
+      // Simples simulação de cadastro/login localStorage
+      let users = JSON.parse(localStorage.getItem('users') || '{}');
+
+      if (!users[usuario]) {
+        users[usuario] = senha;
+        localStorage.setItem('users', JSON.stringify(users));
+        alert('Conta criada com sucesso! Você já está logado.');
+        window.location.href = 'menu.html';
+      } else {
+        if (users[usuario] === senha) {
+          alert('Login realizado com sucesso!');
+          window.location.href = 'menu.html';
+        } else {
+          alert('Senha incorreta! Tente novamente.');
+        }
+      }
+    });
+  </script>
 </body>
 </html>
