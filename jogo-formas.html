@@ -1,167 +1,104 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<title>Jogo: Adivinhe a Forma!</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<style>
-  body {
-    background: #fce4ec;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    text-align: center;
-    padding: 2rem;
-  }
-  h1 {
-    color: #d81b60;
-  }
-  .forma-alvo {
-    width: 180px;
-    height: 180px;
-    margin: 20px auto;
-    position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  }
-  .circulo {
-    border-radius: 50%;
-    background: #f06292;
-    width: 180px;
-    height: 180px;
-  }
-  .quadrado {
-    background: #ba68c8;
-    width: 180px;
-    height: 180px;
-  }
-  .triangulo {
-    width: 0;
-    height: 0;
-    border-left: 90px solid transparent;
-    border-right: 90px solid transparent;
-    border-bottom: 160px solid #4dd0e1;
-    margin: 0 auto;
-  }
-  .retangulo {
-    width: 220px;
-    height: 120px;
-    background: #4db6ac;
-    margin: 30px auto 0;
-  }
-  .opcoes {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  button {
-    background: #f48fb1;
-    border: none;
-    border-radius: 20px;
-    padding: 15px 25px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    transition: background-color 0.3s;
-  }
-  button:hover {
-    background: #ec407a;
-    color: white;
-  }
-  .resultado {
-    margin-top: 20px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #880e4f;
-    min-height: 40px;
-  }
-  .botao-voltar {
-    margin-top: 30px;
-    background-color: #d81b60;
-    color: white;
-    border: none;
-    border-radius: 15px;
-    padding: 10px 20px;
-    font-size: 1.1rem;
-    cursor: pointer;
-  }
-</style>
+  <meta charset="UTF-8">
+  <title>Jogo das Formas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #fff8e1;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      background-color: #fbc02d;
+      color: white;
+      margin: 0;
+      padding: 20px;
+    }
+
+    .descricao {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      color: #795548;
+    }
+
+    .formas-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 30px;
+      gap: 30px;
+    }
+
+    .forma {
+      width: 120px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .forma:hover {
+      transform: scale(1.1);
+    }
+
+    .circle {
+      background-color: #ff8a65;
+      border-radius: 50%;
+    }
+
+    .square {
+      background-color: #4fc3f7;
+    }
+
+    .triangle {
+      width: 0;
+      height: 0;
+      border-left: 60px solid transparent;
+      border-right: 60px solid transparent;
+      border-bottom: 120px solid #aed581;
+      background: none;
+    }
+
+    .resultado {
+      font-size: 1.3rem;
+      margin-top: 20px;
+      color: green;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-  <h1>Adivinhe a forma!</h1>
-  <div id="formaAlvo" class="forma-alvo"></div>
-  <div class="opcoes" id="opcoes"></div>
+  <h1>Jogo das Formas</h1>
+  <div class="descricao" id="dica">Qual forma é redonda?</div>
+
+  <div class="formas-container">
+    <div class="forma square" onclick="verificarResposta('quadrado')"></div>
+    <div class="forma triangle" onclick="verificarResposta('triangulo')"></div>
+    <div class="forma circle" onclick="verificarResposta('circulo')"></div>
+  </div>
+
   <div class="resultado" id="resultado"></div>
-  <button class="botao-voltar" onclick="window.location.href='menu.html'">Voltar ao Menu</button>
 
-<script>
-  const formas = [
-    { nome: 'Círculo', classe: 'circulo' },
-    { nome: 'Quadrado', classe: 'quadrado' },
-    { nome: 'Triângulo', classe: 'triangulo' },
-    { nome: 'Retângulo', classe: 'retangulo' }
-  ];
-
-  let formaAtual = null;
-
-  function gerarJogo() {
-    formaAtual = formas[Math.floor(Math.random() * formas.length)];
-    const formaAlvo = document.getElementById('formaAlvo');
-    formaAlvo.innerHTML = ''; // limpa
-    formaAlvo.className = 'forma-alvo'; // reseta classes
-
-    if (formaAtual.classe === 'triangulo') {
-      // Para triângulo, a forma é um div separado, pois usa bordas
-      const tri = document.createElement('div');
-      tri.className = 'triangulo';
-      formaAlvo.appendChild(tri);
-    } else {
-      // Para outras formas, adiciona a classe colorida
-      formaAlvo.classList.add(formaAtual.classe);
-    }
-
-    document.getElementById('resultado').textContent = '';
-
-    // Prepara opções embaralhadas (3 opções: a correta + 2 erradas)
-    let opcoes = [formaAtual];
-    while (opcoes.length < 3) {
-      const opcaoAleatoria = formas[Math.floor(Math.random() * formas.length)];
-      if (!opcoes.find(f => f.nome === opcaoAleatoria.nome)) {
-        opcoes.push(opcaoAleatoria);
+  <script>
+    function verificarResposta(resposta) {
+      const correta = "circulo";
+      const resultado = document.getElementById("resultado");
+      if (resposta === correta) {
+        resultado.innerText = "Parabéns! Você acertou!";
+        resultado.style.color = "green";
+      } else {
+        resultado.innerText = "Ops! Tente novamente.";
+        resultado.style.color = "red";
       }
     }
-
-    opcoes = opcoes.sort(() => Math.random() - 0.5);
-
-    const container = document.getElementById('opcoes');
-    container.innerHTML = '';
-    opcoes.forEach(opcao => {
-      const btn = document.createElement('button');
-      btn.textContent = opcao.nome;
-      btn.onclick = () => verificarResposta(opcao.nome);
-      container.appendChild(btn);
-    });
-  }
-
-  function verificarResposta(resposta) {
-    const resultado = document.getElementById('resultado');
-    if (resposta === formaAtual.nome) {
-      resultado.textContent = 'Muito bem! Você acertou!';
-      falar('Muito bem! Você acertou!');
-      setTimeout(gerarJogo, 1500);
-    } else {
-      resultado.textContent = 'Ops! Tente novamente.';
-      falar('Ops! Tente novamente.');
-    }
-  }
-
-  function falar(texto) {
-    const voz = new SpeechSynthesisUtterance(texto);
-    voz.lang = "pt-BR";
-    speechSynthesis.speak(voz);
-  }
-
-  gerarJogo();
-</script>
+  </script>
 </body>
 </html>
