@@ -1,48 +1,57 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Menu Principal</title>
+  <meta charset="UTF-8" />
+  <title>Menu - Site Autismo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+      background: #ffe082;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
       text-align: center;
-      padding: 40px;
+      padding: 2rem;
+      margin: 0;
     }
     h1 {
-      margin-bottom: 30px;
+      color: #ef6c00;
+      margin-bottom: 1rem;
     }
-    .menu {
+    .botoes {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+      gap: 1rem;
       max-width: 600px;
-      margin: auto;
+      margin: 0 auto;
     }
-    .botao {
-      background-color: #ffffff;
-      padding: 20px;
+    button {
+      background-color: #ffca28;
+      border: none;
       border-radius: 15px;
-      text-decoration: none;
-      color: #2c3e50;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      transition: background 0.3s;
+      padding: 1.2rem 1rem;
+      font-size: 1.1rem;
+      cursor: pointer;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: background-color 0.3s ease;
     }
-    .botao:hover {
-      background-color: #dfe6e9;
+    button:hover {
+      background-color: #ffa000;
+      color: white;
+    }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #6d4c41;
     }
   </style>
 </head>
 <body>
-  <h1>Olá! Escolha uma atividade</h1>
-  <div class="menu">
-    <a class="botao" href="cores.html">Cores</a>
-    <a class="botao" href="formas.html">Formas</a>
-    <a class="botao" href="numeros.html">Números</a>
-    <a class="botao" href="letras.html">Letras</a>
-    <a class="botao" href="musicas.html">Músicas</a>
+  <h1>Escolha o que quer aprender!</h1>
+  <div class="botoes">
+    <button onclick="window.location.href='cores.html'">Cores</button>
+    <button onclick="window.location.href='formas.html'">Formas</button>
+    <button onclick="window.location.href='letras.html'">Letras</button>
+    <!-- Futuras páginas podem ser adicionadas aqui -->
   </div>
+  <footer>Site para ajudar pessoas com autismo a aprender brincando!</footer>
 </body>
 </html>
