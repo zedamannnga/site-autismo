@@ -1,23 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <title>Formas Geométricas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8">
+  <title>Jogo das Formas</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
     body {
-      background: #fff3e0;
       font-family: 'Comic Sans MS', cursive, sans-serif;
-      text-align: center;
+      background-color: #fff8e1;
       margin: 0;
       padding: 0;
+      text-align: center;
     }
+
     h1 {
-      background-color: #ffb74d;
+      background-color: #fbc02d;
+      color: white;
       margin: 0;
       padding: 20px;
-      color: #ffffff;
     }
+
+    .descricao {
+      font-size: 1.2rem;
+      margin-top: 20px;
+      color: #795548;
+    }
+
     .formas-container {
       display: flex;
       flex-wrap: wrap;
@@ -25,63 +33,93 @@
       padding: 30px;
       gap: 30px;
     }
+
     .forma {
-      width: 150px;
-      height: 150px;
-      background-color: #ffe0b2;
-      border-radius: 20px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 120px;
+      height: 120px;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 1.3rem;
-      font-weight: bold;
       transition: transform 0.3s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     }
+
     .forma:hover {
-      transform: scale(1.05);
+      transform: scale(1.1);
     }
+
     .circle {
+      background-color: #ff8a65;
       border-radius: 50%;
-      background-color: #81d4fa;
     }
+
     .square {
-      background-color: #aed581;
+      background-color: #4fc3f7;
     }
+
     .triangle {
       width: 0;
       height: 0;
-      border-left: 75px solid transparent;
-      border-right: 75px solid transparent;
-      border-bottom: 130px solid #f06292;
-      background-color: transparent;
+      border-left: 60px solid transparent;
+      border-right: 60px solid transparent;
+      border-bottom: 120px solid #aed581;
+      background: none;
     }
-    .triangle-label {
-      margin-top: 10px;
-      font-size: 1.2rem;
+
+    .resultado {
+      font-size: 1.3rem;
+      margin-top: 20px;
+      color: green;
       font-weight: bold;
-      color: #f06292;
+    }
+
+    .voltar {
+      margin-top: 30px;
+    }
+
+    .voltar a {
+      background-color: #fbc02d;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: background-color 0.3s;
+    }
+
+    .voltar a:hover {
+      background-color: #f9a825;
     }
   </style>
 </head>
 <body>
-  <h1>Aprenda as Formas!</h1>
+  <h1>Jogo das Formas</h1>
+  <div class="descricao" id="dica">Qual forma é redonda?</div>
 
   <div class="formas-container">
-    <div class="forma circle" onclick="dizer('Círculo')">Círculo</div>
-    <div class="forma square" onclick="dizer('Quadrado')">Quadrado</div>
-    <div>
-      <div class="triangle" onclick="dizer('Triângulo')"></div>
-      <div class="triangle-label">Triângulo</div>
-    </div>
+    <div class="forma square" onclick="verificarResposta('quadrado')"></div>
+    <div class="forma triangle" onclick="verificarResposta('triangulo')"></div>
+    <div class="forma circle" onclick="verificarResposta('circulo')"></div>
+  </div>
+
+  <div class="resultado" id="resultado"></div>
+
+  <div class="voltar">
+    <a href="menu.html">Voltar ao Menu</a>
   </div>
 
   <script>
-    function dizer(texto) {
-      const fala = new SpeechSynthesisUtterance(texto);
-      fala.lang = 'pt-BR';
-      speechSynthesis.speak(fala);
+    function verificarResposta(resposta) {
+      const correta = "circulo";
+      const resultado = document.getElementById("resultado");
+      if (resposta === correta) {
+        resultado.innerText = "Parabéns! Você acertou!";
+        resultado.style.color = "green";
+      } else {
+        resultado.innerText = "Ops! Tente novamente.";
+        resultado.style.color = "red";
+      }
     }
   </script>
 </body>
