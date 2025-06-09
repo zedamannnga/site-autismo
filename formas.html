@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Jogo das Formas</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
       font-family: 'Comic Sans MS', cursive, sans-serif;
-      background-color: #fff8e1;
+      background-color: #fff9c4;
       margin: 0;
       padding: 0;
       text-align: center;
@@ -21,15 +21,15 @@
     }
 
     .descricao {
-      font-size: 1.2rem;
+      font-size: 1.3rem;
       margin-top: 20px;
-      color: #795548;
+      color: #5d4037;
     }
 
     .formas-container {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
+      flex-wrap: wrap;
       padding: 30px;
       gap: 30px;
     }
@@ -42,7 +42,7 @@
       justify-content: center;
       cursor: pointer;
       transition: transform 0.3s;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 
     .forma:hover {
@@ -50,12 +50,12 @@
     }
 
     .circle {
-      background-color: #ff8a65;
+      background-color: #ff7043;
       border-radius: 50%;
     }
 
     .square {
-      background-color: #4fc3f7;
+      background-color: #29b6f6;
     }
 
     .triangle {
@@ -63,14 +63,13 @@
       height: 0;
       border-left: 60px solid transparent;
       border-right: 60px solid transparent;
-      border-bottom: 120px solid #aed581;
+      border-bottom: 120px solid #66bb6a;
       background: none;
     }
 
     .resultado {
       font-size: 1.3rem;
       margin-top: 20px;
-      color: green;
       font-weight: bold;
     }
 
@@ -95,7 +94,7 @@
 </head>
 <body>
   <h1>Jogo das Formas</h1>
-  <div class="descricao" id="dica">Qual forma é redonda?</div>
+  <div class="descricao" id="dica">Qual forma é...</div>
 
   <div class="formas-container">
     <div class="forma square" onclick="verificarResposta('quadrado')"></div>
@@ -110,17 +109,34 @@
   </div>
 
   <script>
+    const formas = [
+      { nome: "círculo", valor: "circulo" },
+      { nome: "quadrado", valor: "quadrado" },
+      { nome: "triângulo", valor: "triangulo" },
+    ];
+
+    let correta = "";
+
+    function novaPergunta() {
+      const sorteada = formas[Math.floor(Math.random() * formas.length)];
+      document.getElementById("dica").innerHTML = `Qual forma é um <strong>${sorteada.nome}</strong>?`;
+      correta = sorteada.valor;
+      document.getElementById("resultado").innerText = "";
+    }
+
     function verificarResposta(resposta) {
-      const correta = "circulo";
       const resultado = document.getElementById("resultado");
       if (resposta === correta) {
-        resultado.innerText = "Parabéns! Você acertou!";
+        resultado.innerText = "Muito bem! Você acertou!";
         resultado.style.color = "green";
+        setTimeout(novaPergunta, 2000); // Nova pergunta após 2 segundos
       } else {
-        resultado.innerText = "Ops! Tente novamente.";
+        resultado.innerText = "Não é essa! Tente de novo!";
         resultado.style.color = "red";
       }
     }
+
+    window.onload = novaPergunta;
   </script>
 </body>
 </html>
