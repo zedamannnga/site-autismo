@@ -1,59 +1,126 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Números</title>
+  <meta charset="UTF-8" />
+  <title>Jogo dos Números</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #fff9c4;
+      font-family: 'Comic Sans MS', cursive;
+      background-color: #fffde7;
       text-align: center;
-      padding: 30px;
+      margin: 0;
+      padding: 0;
     }
     h1 {
-      margin-bottom: 30px;
+      background-color: #fdd835;
+      color: #333;
+      padding: 20px;
+      margin: 0;
     }
-    .numeros {
+    .pergunta {
+      font-size: 1.5rem;
+      margin: 30px;
+    }
+    .opcoes {
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
-      gap: 20px;
-      justify-content: center;
+      gap: 15px;
+      padding: 20px;
     }
-    .numero {
-      width: 80px;
-      height: 80px;
-      background-color: #f39c12;
-      color: white;
-      border-radius: 50%;
-      font-size: 2rem;
-      font-weight: bold;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .opcao {
+      background-color: #fff;
+      border: 2px solid #ccc;
+      border-radius: 12px;
+      font-size: 1.8rem;
+      width: 70px;
+      height: 70px;
+      line-height: 70px;
       cursor: pointer;
+      transition: all 0.2s;
+    }
+    .opcao:hover {
+      background-color: #f0f4c3;
+      border-color: #fdd835;
+    }
+    .resultado {
+      font-size: 1.4rem;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+    .acertou {
+      color: green;
+    }
+    .errou {
+      color: red;
+    }
+    .voltar {
+      margin: 30px 0;
+    }
+    .voltar a {
+      background-color: #fdd835;
+      color: #333;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: background-color 0.3s;
+    }
+    .voltar a:hover {
+      background-color: #fbc02d;
     }
   </style>
 </head>
 <body>
-  <h1>Aprenda os Números</h1>
-  <div class="numeros">
-    <div class="numero" onclick="falar('Um')">1</div>
-    <div class="numero" onclick="falar('Dois')">2</div>
-    <div class="numero" onclick="falar('Três')">3</div>
-    <div class="numero" onclick="falar('Quatro')">4</div>
-    <div class="numero" onclick="falar('Cinco')">5</div>
-    <div class="numero" onclick="falar('Seis')">6</div>
-    <div class="numero" onclick="falar('Sete')">7</div>
-    <div class="numero" onclick="falar('Oito')">8</div>
-    <div class="numero" onclick="falar('Nove')">9</div>
-    <div class="numero" onclick="falar('Dez')">10</div>
+  <h1>Jogo dos Números</h1>
+  <div class="pergunta" id="pergunta">Clique no número correto:</div>
+  <div class="opcoes" id="opcoesContainer"></div>
+  <div class="resultado" id="resultado"></div>
+  <div class="voltar">
+    <a href="menu.html">Voltar ao Menu</a>
   </div>
+
   <script>
-    function falar(texto) {
-      const som = new SpeechSynthesisUtterance(texto);
-      som.lang = "pt-BR";
-      speechSynthesis.speak(som);
+    const numerosExtenso = [
+      "um", "dois", "três", "quatro", "cinco",
+      "seis", "sete", "oito", "nove", "dez"
+    ];
+
+    let numeroCorreto = 0;
+
+    function novaRodada() {
+      numeroCorreto = Math.floor(Math.random() * 10) + 1;
+      document.getElementById("pergunta").innerHTML = `Qual é o número <strong>${numerosExtenso[numeroCorreto - 1].toUpperCase()}</strong>?`;
+
+      const container = document.getElementById("opcoesContainer");
+      container.innerHTML = "";
+
+      const opcoes = Array.from({length: 10}, (_, i) => i + 1).sort(() => Math.random() - 0.5);
+      opcoes.forEach(num => {
+        const div = document.createElement("div");
+        div.className = "opcao";
+        div.innerText = num;
+        div.onclick = () => verificar(num);
+        container.appendChild(div);
+      });
+
+      document.getElementById("resultado").innerText = "";
     }
+
+    function verificar(escolhido) {
+      const r = document.getElementById("resultado");
+      if (escolhido === numeroCorreto) {
+        r.textContent = "Muito bem! Você acertou!";
+        r.className = "resultado acertou";
+        setTimeout(novaRodada, 2000);
+      } else {
+        r.textContent = "Ops! Você errou.";
+        r.className = "resultado errou";
+      }
+    }
+
+    window.onload = novaRodada;
   </script>
 </body>
 </html>
