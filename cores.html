@@ -1,131 +1,147 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<title>Jogo: Adivinhe a Cor!</title>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<style>
-  body {
-    background: #ffecb3;
-    font-family: 'Comic Sans MS', cursive, sans-serif;
-    text-align: center;
-    padding: 2rem;
-  }
-  h1 {
-    color: #f57c00;
-  }
-  .cor-alvo {
-    width: 200px;
-    height: 200px;
-    margin: 20px auto;
-    border-radius: 30px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-  }
-  .opcoes {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  button {
-    background: #ffb300;
-    border: none;
-    border-radius: 20px;
-    padding: 15px 25px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
-    transition: background-color 0.3s;
-  }
-  button:hover {
-    background: #ffa000;
-    color: white;
-  }
-  .resultado {
-    margin-top: 20px;
-    font-size: 1.4rem;
-    font-weight: bold;
-    color: #00796b;
-    min-height: 40px;
-  }
-  .botao-voltar {
-    margin-top: 30px;
-    background-color: #f57c00;
-    color: white;
-    border: none;
-    border-radius: 15px;
-    padding: 10px 20px;
-    font-size: 1.1rem;
-    cursor: pointer;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <title>Jogo das Cores</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background-color: #e3f2fd;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+
+    h1 {
+      background-color: #42a5f5;
+      color: white;
+      padding: 20px;
+      margin: 0;
+    }
+
+    .dica {
+      font-size: 1.3rem;
+      margin-top: 25px;
+      color: #1565c0;
+    }
+
+    .cores-container {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .cor {
+      width: 90px;
+      height: 90px;
+      border-radius: 15px;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+
+    .cor:hover {
+      transform: scale(1.1);
+    }
+
+    .resultado {
+      font-size: 1.4rem;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    .acertou {
+      color: green;
+    }
+
+    .errou {
+      color: red;
+    }
+
+    .voltar {
+      margin-top: 40px;
+    }
+
+    .voltar a {
+      background-color: #42a5f5;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 25px;
+      text-decoration: none;
+      font-size: 1.1rem;
+      transition: background-color 0.3s;
+    }
+
+    .voltar a:hover {
+      background-color: #1e88e5;
+    }
+  </style>
 </head>
 <body>
-  <h1>Adivinhe a cor!</h1>
-  <div id="corAlvo" class="cor-alvo"></div>
-  <div class="opcoes" id="opcoes"></div>
+  <h1>Jogo das Cores</h1>
+  <div class="dica" id="dica">Clique na cor: <strong>---</strong></div>
+
+  <div class="cores-container" id="coresContainer"></div>
+
   <div class="resultado" id="resultado"></div>
-  <button class="botao-voltar" onclick="window.location.href='menu.html'">Voltar ao Menu</button>
 
-<script>
-  const cores = [
-    {nome: 'Vermelho', codigo: 'red'},
-    {nome: 'Azul', codigo: 'blue'},
-    {nome: 'Verde', codigo: 'green'},
-    {nome: 'Amarelo', codigo: 'gold'},
-    {nome: 'Roxo', codigo: 'purple'},
-    {nome: 'Preto', codigo: 'black'}
-  ];
+  <div class="voltar">
+    <a href="menu.html">Voltar ao Menu</a>
+  </div>
 
-  let corAtual = null;
+  <script>
+    const cores = [
+      { nome: "vermelha", valor: "vermelho", cor: "red" },
+      { nome: "azul", valor: "azul", cor: "blue" },
+      { nome: "amarela", valor: "amarelo", cor: "yellow" },
+      { nome: "verde", valor: "verde", cor: "green" },
+      { nome: "roxa", valor: "roxo", cor: "purple" },
+      { nome: "marrom", valor: "marrom", cor: "brown" },
+      { nome: "preta", valor: "preto", cor: "black" },
+      { nome: "branca", valor: "branco", cor: "white", borda: "1px solid #999" },
+      { nome: "laranja", valor: "laranja", cor: "orange" },
+      { nome: "rosa", valor: "rosa", cor: "pink" }
+    ];
 
-  function gerarJogo() {
-    corAtual = cores[Math.floor(Math.random() * cores.length)];
-    document.getElementById('corAlvo').style.backgroundColor = corAtual.codigo;
-    document.getElementById('resultado').textContent = '';
-    
-    // Mistura as opções (inclui a correta e outras 2 aleatórias)
-    let opcoes = [corAtual];
-    while (opcoes.length < 3) {
-      let opcaoAleatoria = cores[Math.floor(Math.random() * cores.length)];
-      if (!opcoes.find(c => c.nome === opcaoAleatoria.nome)) {
-        opcoes.push(opcaoAleatoria);
+    let corCorreta = "";
+
+    function novaRodada() {
+      const sorteada = cores[Math.floor(Math.random() * cores.length)];
+      corCorreta = sorteada.valor;
+      document.getElementById("dica").innerHTML = `Clique na cor: <strong>${sorteada.nome.toUpperCase()}</strong>`;
+      document.getElementById("resultado").innerText = "";
+
+      const container = document.getElementById("coresContainer");
+      container.innerHTML = "";
+
+      cores.forEach(c => {
+        const div = document.createElement("div");
+        div.className = "cor";
+        div.style.backgroundColor = c.cor;
+        if (c.borda) {
+          div.style.border = c.borda;
+        }
+        div.onclick = () => verificar(c.valor);
+        container.appendChild(div);
+      });
+    }
+
+    function verificar(corSelecionada) {
+      const resultado = document.getElementById("resultado");
+      if (corSelecionada === corCorreta) {
+        resultado.innerText = "Muito bem! Você acertou!";
+        resultado.className = "resultado acertou";
+        setTimeout(novaRodada, 2000);
+      } else {
+        resultado.innerText = "Ops! Você errou.";
+        resultado.className = "resultado errou";
       }
     }
 
-    opcoes = opcoes.sort(() => Math.random() - 0.5); // embaralhar
-
-    const container = document.getElementById('opcoes');
-    container.innerHTML = '';
-    opcoes.forEach(opcao => {
-      const btn = document.createElement('button');
-      btn.textContent = opcao.nome;
-      btn.onclick = () => verificarResposta(opcao.nome);
-      container.appendChild(btn);
-    });
-  }
-
-  function verificarResposta(resposta) {
-    const resultado = document.getElementById('resultado');
-    if (resposta === corAtual.nome) {
-      resultado.textContent = 'Parabéns! Você acertou!';
-      falar('Parabéns! Você acertou!');
-      setTimeout(gerarJogo, 1500);
-    } else {
-      resultado.textContent = 'Ops! Tente novamente.';
-      falar('Ops! Tente novamente.');
-    }
-  }
-
-  function falar(texto) {
-    const voz = new SpeechSynthesisUtterance(texto);
-    voz.lang = "pt-BR";
-    speechSynthesis.speak(voz);
-  }
-
-  gerarJogo();
-</script>
+    window.onload = novaRodada;
+  </script>
 </body>
 </html>
